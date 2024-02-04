@@ -1,27 +1,25 @@
-/*
-1. напишите приложение, где пользователь вводит строку и букву,
-наличие которой предстоит проверить в введенной строке. выведите в
-терминал полученный результат в терминал, а также индекс последнего
-вхождения буквы в строку.
-*/
-
 import 'dart:io';
 
+import 'package:chapter_1/shared/client_message.dart';
+import 'package:chapter_1/tasks/task_1.dart';
+import 'package:chapter_1/tasks/task_2.dart';
+
 void start(List<String> arguments) {
-  stdout.writeln("Введите строку, затем букву, которую необходимо найти: ");
+  stdout.write("Введите номер задания: ");
+  String? task = stdin.readLineSync();
 
-  String? str = stdin.readLineSync();
-  String? letter = stdin.readLineSync();
-
-  if (str == null || letter == null || str.isEmpty || letter.length != 1) {
-    return stdout.writeln("Неверные входные данные");
+  switch (int.tryParse(task!)) {
+    case 1:
+      task_1(arguments);
+      break;
+    case 2:
+      task_2(arguments);
+      break;
+    case 3:
+      break;
+    case 4:
+      break;
+    default:
+      ClientMessage().errorInputData();
   }
-
-  print("Строка: $str");
-  print("Буква: $letter");
-  print(str.contains(letter)
-      ? "'$letter' содержится в '$str'"
-      : "'$letter' не содержится в '$str'");
-  print(
-      "индекс последнего вхождения буквы в строку: ${str.lastIndexOf(letter)}");
 }
