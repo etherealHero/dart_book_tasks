@@ -1,12 +1,14 @@
-/*
+import 'dart:io';
+
+import 'package:chapter_1/shared.dart';
+
+var task = Task("""
 1. Напишите приложение, позволяющее пользователю вводить список
 целочисленных значений. Удалите все дублирующиеся значения и
 вычислите сумму оставшихся. Выведите в терминал полученный результат.
-*/
+""", execute);
 
-import 'dart:io';
-
-void task_3(List<String> arguments) {
+void execute(List<String> arguments) {
   stdout.write("Введите элементы списка через пробел: ");
   String? integersRaw = stdin.readLineSync();
   List<int?> integers =

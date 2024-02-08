@@ -1,14 +1,14 @@
-/*
+import 'dart:io';
+
+import 'package:chapter_1/shared.dart';
+
+var task = Task("""
 1. Напишите приложение, позволяющее пользователю вводить Map<int,
 String> и число А. Удалите все элементы с ключами, значения которых
 кратны А и выведите в терминал полученный результат.
-*/
+""", execute);
 
-import 'dart:io';
-
-import 'package:chapter_1/shared/client_message.dart';
-
-void task_4(List<String> arguments) {
+void execute(List<String> arguments) {
   stdout.write("Введите ключи через пробел: ");
   List<String> keysRaw = stdin.readLineSync()!.split(' ');
   bool keysContainsNull = keysRaw.map((e) => int.tryParse(e)).contains(null);

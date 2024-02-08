@@ -1,29 +1,32 @@
 import 'dart:io';
 
-import 'package:chapter_1/shared/client_message.dart';
-import 'package:chapter_1/tasks/task_1.dart';
-import 'package:chapter_1/tasks/task_2.dart';
-import 'package:chapter_1/tasks/task_3.dart';
-import 'package:chapter_1/tasks/task_4.dart';
+import 'package:chapter_1/shared.dart';
+import 'package:chapter_1/parts/index.dart';
+import 'package:chapter_1/tasks/index.dart';
 
 void start(List<String> arguments) {
-  stdout.write("Введите номер задания: ");
-  // String? task = stdin.readLineSync();
+  try {
+    stdout.write("Первая задача с каждого раздела (0)"
+        " или раздел с задачами по варианту (1): ");
+    int isPart = int.parse(stdin.readLineSync()!);
 
-  switch (4) {
-    case 1:
-      task_1(arguments);
-      break;
-    case 2:
-      task_2(arguments);
-      break;
-    case 3:
-      task_3(arguments);
-      break;
-    case 4:
-      task_4(arguments);
-      break;
-    default:
-      ClientMessage().errorInputData();
+    if (isPart == 1) {
+      stdout.write("Введите номер части: ");
+      int partNumber = int.parse(stdin.readLineSync()!) - 1;
+
+      stdout.write("Введите номер задания: ");
+      int taskNumber = int.parse(stdin.readLineSync()!) - 1;
+
+      parts.execute(partNumber, taskNumber, arguments);
+    } else if (isPart == 0) {
+      stdout.write("Введите номер задания: ");
+      int taskNumber = int.parse(stdin.readLineSync()!) - 1;
+
+      tasks.execute(taskNumber, arguments);
+    } else {
+      throw Error();
+    }
+  } catch (e) {
+    ClientMessage().errorInputData();
   }
 }

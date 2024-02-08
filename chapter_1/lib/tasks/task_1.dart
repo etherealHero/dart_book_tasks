@@ -1,14 +1,14 @@
-/*
+import 'dart:io';
+import 'package:chapter_1/shared.dart';
+
+var task = Task("""
 1. напишите приложение, где пользователь вводит строку и букву,
 наличие которой предстоит проверить в введенной строке. выведите в
 терминал полученный результат в терминал, а также индекс последнего
 вхождения буквы в строку.
-*/
+""", execute);
 
-import 'dart:io';
-import 'package:chapter_1/shared/client_message.dart';
-
-void task_1(List<String> arguments) {
+void execute(List<String> arguments) {
   stdout.writeln("Введите строку, затем букву, которую необходимо найти: ");
 
   String? str = stdin.readLineSync();

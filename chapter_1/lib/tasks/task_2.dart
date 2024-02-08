@@ -1,12 +1,14 @@
-/*
+import 'dart:io';
+
+import 'package:chapter_1/shared.dart';
+
+var task = Task("""
 1. Напишите приложение, позволяющее пользователю вводить список
 вещественных значений. Выведите в терминал его размер, значения
 первого и последнего элемента.
-*/
+""", execute);
 
-import 'dart:io';
-
-void task_2(List<String> arguments) {
+void execute(List<String> arguments) {
   stdout.write("Введите элементы списка через пробел: ");
   String? doublesRaw = stdin.readLineSync();
   List<double?> doubles =
