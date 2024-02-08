@@ -20,7 +20,7 @@ void execute(List<String> arguments) {
     if (char == letter) cnt++;
   });
 
-  stdout.write("$cnt раз заданная буква входит в строку");
-  stdout
-      .write("${str.indexOf(letter)} индекс первого вхождения буквы в строку");
+  stdout.writeln("$cnt раз заданная буква входит в строку");
+  stdout.writeln(
+      "${str.indexOf(letter)} индекс первого вхождения буквы в строку");
 }
