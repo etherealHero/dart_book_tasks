@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:chapter_1/shared.dart';
 
 var task = Task("""
@@ -7,4 +8,17 @@ var task = Task("""
 результат.
 """, execute);
 
-void execute(List<String> arguments) {}
+void execute(List<String> arguments) {
+  stdout.write("Введите список вещественных значений: ");
+  List<num> numbers =
+      stdin.readLineSync()!.split(" ").map((e) => num.parse(e)).toList();
+
+  stdout.write("Введите число А: ");
+  num integerA = num.parse(stdin.readLineSync()!);
+
+  stdout.write("Введите число B: ");
+  int integerB = int.parse(stdin.readLineSync()!);
+
+  numbers.insert(integerB, integerA);
+  stdout.writeln(numbers);
+}
