@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:chapter_1/shared.dart';
 
 var task = Task("""
@@ -7,4 +8,18 @@ var task = Task("""
 терминал полученный результат.
 """, execute);
 
-void execute(List<String> arguments) {}
+void execute(List<String> arguments) {
+  stdout.write("Введите список целочисленных значений: ");
+  List<int> integers =
+      stdin.readLineSync()!.split(" ").map((e) => int.parse(e)).toList();
+
+  stdout.write("Введите число А: ");
+  int integerA = int.parse(stdin.readLineSync()!);
+
+  Set<int> set = Set.from(integers.where((e) => e > integerA));
+
+  int sum = set.reduce((sum, e) => sum + e);
+
+  stdout.writeln(set);
+  stdout.writeln("Сумма элементов: $sum");
+}
