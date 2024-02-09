@@ -4,13 +4,6 @@ import 'package:chapter_1/parts/index.dart';
 import 'package:chapter_1/tasks/index.dart';
 
 void start(List<String> arguments) {
-  // int partNumber = 4;
-  // int taskNumber = 1;
-
-  // parts.execute(partNumber - 1, taskNumber - 1, arguments);
-
-  // return;
-
   try {
     stdout.write("Первая задача с каждого раздела (0)"
         " или раздел с задачами по варианту (1): ");
