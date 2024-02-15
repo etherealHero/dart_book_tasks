@@ -4,17 +4,17 @@ import 'package:chapter_2/lab_2/index.dart' as lab_2;
 import 'package:chapter_2/lab_3/index.dart' as lab_3;
 
 void start(List<String> arguments) {
-  // int labNumber = 2;
-  // int partNumber = 1;
-  // int taskNumber = 1;
+  int labNumber = 2;
+  int partNumber = 2;
+  int taskNumber = 3;
 
-  // if (labNumber == 2) {
-  //   lab_2.parts.execute(partNumber - 1, taskNumber - 1, arguments);
-  // } else if (labNumber == 3) {
-  //   lab_3.parts.execute(partNumber - 1, taskNumber - 1, arguments);
-  // }
+  if (labNumber == 2) {
+    lab_2.parts.execute(partNumber - 1, taskNumber - 1, arguments);
+  } else if (labNumber == 3) {
+    lab_3.parts.execute(partNumber - 1, taskNumber - 1, arguments);
+  }
 
-  // return;
+  return;
 
   try {
     stdout.write("Лабораторная работа №2 (0)"

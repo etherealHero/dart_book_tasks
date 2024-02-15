@@ -8,5 +8,26 @@ var task = Task("""
 """, execute);
 
 void execute(List<String> arguments) {
-  stdout.write("");
+  num val1, val2;
+
+  stdout.write("Введите значение val1: ");
+  String? val1Raw = stdin.readLineSync();
+
+  if (val1Raw != null && num.tryParse(val1Raw) != null) {
+    val1 = num.parse(val1Raw);
+  } else {
+    return ClientMessage().errorInputData();
+  }
+
+  stdout.write("Введите значение val2: ");
+  String? val2Raw = stdin.readLineSync();
+
+  if (val2Raw != null && num.tryParse(val2Raw) != null) {
+    val2 = num.parse(val2Raw);
+  } else {
+    return ClientMessage().errorInputData();
+  }
+
+  stdout.writeln("Выражение (val1 * 3 + val1) / 4 – val2: "
+      "${(val1 * 3 + val1) / 4 - val2}");
 }

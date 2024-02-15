@@ -8,5 +8,15 @@ var task = Task("""
 """, execute);
 
 void execute(List<String> arguments) {
-  stdout.write("");
+  stdout.write("Введите строку: ");
+  String? str = stdin.readLineSync();
+
+  if (str == null) return ClientMessage().errorInputData();
+
+  if (str.split('') case [String firstLetter, ...List<String> other]
+      when firstLetter == 'W' && other.length < 15) {
+    stdout.writeln(str);
+  } else {
+    stdout.writeln("Pattern no matched");
+  }
 }
