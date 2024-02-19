@@ -8,5 +8,41 @@ var task = Task("""
 """, execute);
 
 void execute(List<String> arguments) {
-  stdout.write("");
+  stdout.write("Введите список минимум из 6 элементов: ");
+  String? listRaw = stdin.readLineSync();
+  List<String> list;
+
+  if (listRaw == null || listRaw.isEmpty) {
+    return ClientMessage().errorInputData();
+  }
+
+  list = listRaw.split(" ");
+
+  stdout.writeln(switch (list) {
+    [String first, ...List<String> other, String last]
+        when first == last && other.length >= 4 =>
+      "True",
+    [String first, ...List<String> other, String last]
+        when first != last && other.length >= 4 =>
+      "False",
+    _ => "Неверные входные данные"
+  });
+
+  if (list case [String first, ...List<String> other, String last]
+      when first == last && other.length >= 4) {
+    stdout.writeln("True");
+  } else if (list case [String first, ...List<String> other, String last]
+      when first != last && other.length >= 4) {
+    stdout.writeln("False");
+  } else {
+    stdout.writeln("Неверные входные данные");
+  }
+
+  if (list.length >= 6 && list.first == list.last) {
+    stdout.writeln("True");
+  } else if (list.length >= 6 && list.first != list.last) {
+    stdout.writeln("False");
+  } else {
+    stdout.writeln("Неверные входные данные");
+  }
 }

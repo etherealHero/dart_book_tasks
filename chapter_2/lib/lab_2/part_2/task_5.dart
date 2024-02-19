@@ -12,5 +12,8 @@ var task = Task("""
 """, execute);
 
 void execute(List<String> arguments) {
-  stdout.write("");
+  var record = (23, 89, pef: 'Oo', pruf: 3.976);
+  var (_, second, pef: _, pruf: pruf) = record;
+
+  stdout.writeln("second: $second, pruf: $pruf");
 }

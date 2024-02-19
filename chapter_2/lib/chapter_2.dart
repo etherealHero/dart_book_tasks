@@ -5,8 +5,8 @@ import 'package:chapter_2/lab_3/index.dart' as lab_3;
 
 void start(List<String> arguments) {
   int labNumber = 2;
-  int partNumber = 2;
-  int taskNumber = 3;
+  int partNumber = 3;
+  int taskNumber = 5;
 
   if (labNumber == 2) {
     lab_2.parts.execute(partNumber - 1, taskNumber - 1, arguments);

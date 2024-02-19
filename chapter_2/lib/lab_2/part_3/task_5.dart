@@ -10,5 +10,28 @@ var task = Task("""
 """, execute);
 
 void execute(List<String> arguments) {
-  stdout.write("");
+  stdout.write("Введите темпиратуру: ");
+  String? tempRaw = stdin.readLineSync();
+
+  if (tempRaw == null || !tempRaw.contains(RegExp(r"\d+\.\d+[cf]"))) {
+    return ClientMessage().errorInputData();
+  }
+
+  String temp = tempRaw;
+
+  if (temp.endsWith("f")) {
+    stdout
+        .writeln((num.parse(temp.substring(0, temp.length - 1)) - 32) * 5 / 9);
+  } else {
+    stdout
+        .writeln((num.parse(temp.substring(0, temp.length - 1)) * 9 / 5) + 32);
+  }
+
+  stdout.writeln(switch (temp) {
+    String t when t.endsWith("f") =>
+      (num.parse(temp.substring(0, temp.length - 1)) - 32) * 5 / 9,
+    String t when t.endsWith("c") =>
+      (num.parse(temp.substring(0, temp.length - 1)) * 9 / 5) + 32,
+    _ => "Неверные входные данные"
+  });
 }
