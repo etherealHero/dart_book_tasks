@@ -8,5 +8,15 @@ var task = Task("""
 """, execute);
 
 void execute(List<String> arguments) {
-  stdout.write("");
+  stdout.write("Введите положительное число: ");
+  String? numRaw = stdin.readLineSync();
+
+  if (numRaw == null || int.tryParse(numRaw) == null) {
+    return ClientMessage().errorInputData();
+  }
+
+  int num = int.parse(numRaw);
+
+  stdout.writeln(num.toRadixString(2));
+  stdout.writeln((num >> 4 << 4).toRadixString(2));
 }

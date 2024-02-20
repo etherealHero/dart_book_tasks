@@ -9,5 +9,18 @@ var task = Task("""
 """, execute);
 
 void execute(List<String> arguments) {
-  stdout.write("");
+  stdout.write("Введите положительное число: ");
+  String? n = stdin.readLineSync();
+  String mask = '';
+
+  if (n == null || int.tryParse(n) == null) {
+    return ClientMessage().errorInputData();
+  }
+
+  for (var bit in int.parse(n).toRadixString(2).split("")) {
+    mask += int.parse(bit) & 1 == 1 ? "0" : "1";
+  }
+
+  stdout.writeln(int.parse(n).toRadixString(2));
+  stdout.writeln(mask);
 }
