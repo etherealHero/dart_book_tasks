@@ -17,5 +17,18 @@ var task = Task("""
 """, execute);
 
 void execute(List<String> arguments) {
-  stdout.write("");
+  stdout.write("Введите положительное число: ");
+  String? numRaw = stdin.readLineSync();
+
+  if (numRaw == null || int.tryParse(numRaw) == null) {
+    return ClientMessage().errorInputData();
+  }
+
+  stdout.writeln(switch (int.parse(numRaw)) {
+    int n when (n & 4) == 4 =>
+      "Третий бит справа установлен в 1: ${n.toRadixString(2)}",
+    int n when (n & 4) != 4 =>
+      "Третий бит справа не установлен в 1, исправляем: ${(n | 4).toRadixString(2)}",
+    _ => "Неверные входные данные"
+  });
 }
