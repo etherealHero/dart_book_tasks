@@ -1,0 +1,29 @@
+import 'dart:io';
+import 'package:chapter_2/shared.dart';
+import 'package:chapter_2/lab_4/index.dart' as lab_4;
+import 'package:chapter_2/lab_5/index.dart' as lab_5;
+import 'package:chapter_2/lab_6/index.dart' as lab_6;
+
+final List<Tasks> labs = [lab_4.tasks, lab_5.tasks, lab_6.tasks];
+
+void start(List<String> arguments) {
+  // int labNumber = 4;
+  // int taskNumber = 1;
+
+  // labs[labNumber - 4].execute(taskNumber - 1, arguments);
+  // return;
+
+  try {
+    stdout.write("Номер Лабораторной работы 4, 5, или 6: ");
+    int labNumber = int.parse(stdin.readLineSync()!);
+
+    if (![4, 5, 6].contains(labNumber)) throw Error();
+
+    stdout.write("Введите номер задания: ");
+    int taskNumber = int.parse(stdin.readLineSync()!) - 1;
+
+    labs[labNumber - 4].execute(taskNumber, arguments);
+  } catch (e) {
+    ClientMessage().errorInputData();
+  }
+}
