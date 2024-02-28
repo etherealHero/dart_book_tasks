@@ -15,5 +15,27 @@ var task = Task("""
 """, execute);
 
 void execute(List<String> arguments) {
-  stdout.write("");
+  stdout.write("Введите целочисленный список: ");
+  String? listRaw = stdin.readLineSync();
+
+  if (listRaw == null ||
+      listRaw.split(" ").indexWhere((e) => int.tryParse(e) == null) != -1) {
+    return ClientMessage().errorInputData();
+  }
+
+  List<int> list = listRaw.split(" ").map((e) => int.parse(e)).toList();
+
+  if (list.isEmpty) return ClientMessage().errorInputData();
+
+  stdout.writeln(getMaxValueOfList(list));
+}
+
+int getMaxValueOfList(List<int> list) {
+  int maxValue = list[0];
+
+  for (var value in list) {
+    if (value > maxValue) maxValue = value;
+  }
+
+  return maxValue;
 }
