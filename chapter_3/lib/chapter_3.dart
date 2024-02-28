@@ -14,12 +14,12 @@ void execute(List<String> arguments) {
   // return;
 
   try {
-    stdout.write("Номер Лабораторной работы 4, 5, или 6: ");
+    stdmsg.selectLab();
     int labNumber = int.parse(stdin.readLineSync()!);
 
     if (![4, 5, 6].contains(labNumber)) throw Error();
 
-    stdout.write("Введите номер задания: ");
+    stdmsg.selectTask();
     int taskNumber = int.parse(stdin.readLineSync()!) - 1;
 
     _labs[labNumber - 4].execute(taskNumber, arguments);

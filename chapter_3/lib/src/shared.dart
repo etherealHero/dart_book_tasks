@@ -2,7 +2,15 @@ import 'dart:io';
 
 class _ClientMessage {
   void raiseError() {
-    stdout.writeln("Неверные входные данные");
+    stdout.write("Неверные входные данные");
+  }
+
+  void selectLab() {
+    stdout.write("Номер Лабораторной работы 4, 5, или 6: ");
+  }
+
+  void selectTask() {
+    stdout.write("Введите номер задания: ");
   }
 }
 
@@ -27,15 +35,5 @@ class Tasks {
 
   void execute(int taskNumber, List<String> arguments) {
     tasks[taskNumber].execute(arguments);
-  }
-}
-
-class Parts {
-  Parts(this.parts);
-
-  final List<Tasks> parts;
-
-  void execute(int partNumber, int taskNumber, List<String> arguments) {
-    parts[partNumber].execute(taskNumber, arguments);
   }
 }
