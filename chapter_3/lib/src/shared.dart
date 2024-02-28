@@ -1,8 +1,12 @@
-class ClientMessage {
-  void errorInputData() {
-    print("Неверные входные данные");
+import 'dart:io';
+
+class _ClientMessage {
+  void raiseError() {
+    stdout.writeln("Неверные входные данные");
   }
 }
+
+var stdmsg = _ClientMessage();
 
 class Task {
   final String description;
@@ -11,7 +15,7 @@ class Task {
   Task(this.description, this.cb);
 
   void execute(List<String> arguments) {
-    print(description);
+    // print(description);
     cb(arguments);
   }
 }

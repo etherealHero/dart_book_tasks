@@ -6,7 +6,7 @@
 ЗАПРЕЩЕНО использовать рекурсию.
 */
 import 'dart:io';
-import 'package:chapter_2/shared.dart';
+import 'package:chapter_3/src/shared.dart';
 
 var task = Task("""
 1. Пользователь вводит с клавиатуры целочисленный список. Напишите
@@ -20,14 +20,14 @@ void execute(List<String> arguments) {
 
   if (listRaw == null ||
       listRaw.split(" ").indexWhere((e) => int.tryParse(e) == null) != -1) {
-    return ClientMessage().errorInputData();
+    return stdmsg.raiseError();
   }
 
   List<int> list = listRaw.split(" ").map((e) => int.parse(e)).toList();
 
-  if (list.isEmpty) return ClientMessage().errorInputData();
+  if (list.isEmpty) return stdmsg.raiseError();
 
-  stdout.writeln(getMaxValueOfList(list));
+  stdout.write(getMaxValueOfList(list));
 }
 
 int getMaxValueOfList(List<int> list) {

@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:chapter_2/shared.dart';
+import 'package:chapter_3/src/shared.dart';
 
 var task = Task("""
 3. Напишите функцию, на вход которой подается строка. Она должна

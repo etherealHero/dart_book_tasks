@@ -1,4 +1,4 @@
-name: chapter_2
+name: chapter_3
 description: A sample command-line application.
 version: 1.0.0
 # repository: https://github.com/my_org/my_repo
@@ -11,5 +11,6 @@ dependencies:
   # path: ^1.8.0
 
 dev_dependencies:
+  async: ^2.11.0
   lints: ^2.1.0
   test: ^1.24.0
