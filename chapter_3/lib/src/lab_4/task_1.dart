@@ -15,7 +15,7 @@ var task = Task("""
 """, execute);
 
 void execute(List<String> arguments) {
-  stdout.write("Введите целочисленный список: ");
+  stdout.writeln("Введите целочисленный список: ");
   String? listRaw = stdin.readLineSync();
 
   if (listRaw == null ||
@@ -27,7 +27,7 @@ void execute(List<String> arguments) {
 
   if (list.isEmpty) return stdmsg.raiseError();
 
-  stdout.write(getMaxValueOfList(list));
+  stdout.writeln("Максимальное число: ${getMaxValueOfList(list)}");
 }
 
 int getMaxValueOfList(List<int> list) {

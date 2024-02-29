@@ -2,15 +2,15 @@ import 'dart:io';
 
 class _ClientMessage {
   void raiseError() {
-    stdout.write("Неверные входные данные");
+    stdout.writeln("Неверные входные данные");
   }
 
   void selectLab() {
-    stdout.write("Номер Лабораторной работы 4, 5, или 6: ");
+    stdout.writeln("Номер Лабораторной работы 4, 5, или 6: ");
   }
 
   void selectTask() {
-    stdout.write("Введите номер задания: ");
+    stdout.writeln("Введите номер задания: ");
   }
 }
 

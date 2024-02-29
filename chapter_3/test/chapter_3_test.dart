@@ -1,36 +1,33 @@
+@Timeout(Duration(seconds: 3))
+
 import "dart:convert";
 import "dart:io";
-import "package:async/async.dart";
 import "package:test/test.dart";
 
 void main() {
-  test("Выбор номера Лабораторной работы", () async {
+  test("Поиск максимального числа", () async {
     var process = await Process.start(
       "dart",
       ['run', '${Directory.current.path}\\bin\\chapter_3.dart'],
     );
 
-    var stdoutSplitter = StreamSplitter(
-      process.stdout
-          .transform(
-            utf8.decoder,
-          )
-          .transform(
-            const LineSplitter(),
-          ),
-    );
+    var step = 0;
+    var workflowCase = [
+      ("Номер Лабораторной работы 4, 5, или 6: ", "4"),
+      ("Введите номер задания: ", "1"),
+      ("Введите целочисленный список: ", "11 28 -10"),
+      ("Максимальное число: 28", ""),
+    ];
 
-    process.stdin.writeln("4");
-    process.stdin.writeln("1");
-    process.stdin.writeln("1 13 28 2 -10");
+    process.stdout.transform(utf8.decoder).transform(LineSplitter()).listen(
+      (String lineOutput) {
+        var (String expectedOutput, String inputLine) = workflowCase[step];
 
-    var taskOutput = await stdoutSplitter.split().first;
-    expect(
-      taskOutput,
-      "Номер Лабораторной работы 4, 5, или 6: "
-      "Введите номер задания: "
-      "Введите целочисленный список: "
-      "28",
+        expect(lineOutput, expectedOutput);
+
+        if (step < workflowCase.length) process.stdin.writeln(inputLine);
+        step++;
+      },
     );
 
     var exitCode = await process.exitCode;
