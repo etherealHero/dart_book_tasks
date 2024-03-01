@@ -2,7 +2,7 @@
 
 import "dart:convert";
 import "dart:io";
-import "package:chapter_3/src/lab_4/task_1.dart";
+import "package:chapter_3/src/lab_4/task_3.dart";
 import "package:test/test.dart";
 
 void main() {
@@ -19,13 +19,37 @@ void main() {
 
   tearDown(() => process.kill());
 
-  group("Поиск максималього числа (интеграционный)", () {
-    test("Верное максимальное число", () async {
+  group("Цельсий в фаренгейты (интеграционный)", () {
+    test("Дробное число", () async {
       testCase() sync* {
         yield ("Номер Лабораторной работы 4, 5, или 6: ", "4");
-        yield ("Введите номер задания: ", "1");
-        yield ("Введите целочисленный список: ", "10 28 -1 0");
-        yield ("Максимальное число: 28", null);
+        yield ("Введите номер задания: ", "3");
+        yield ("Введите цельсий: ", "36.6");
+        yield ("Фаренгейты: 97.88", null);
+      }
+
+      var io = testCase().iterator;
+
+      await for (String output in stream) {
+        if (io.moveNext()) {
+          var (String expectedOutput, String? input) = io.current;
+          expect(output, expectedOutput);
+          process.stdin.writeln(input);
+        } else {
+          process.kill();
+        }
+      }
+
+      var exitCode = await process.exitCode;
+      expect(exitCode, 0, reason: "Ожидалось завершение программы");
+    });
+
+    test("Целое число", () async {
+      testCase() sync* {
+        yield ("Номер Лабораторной работы 4, 5, или 6: ", "4");
+        yield ("Введите номер задания: ", "3");
+        yield ("Введите цельсий: ", "28");
+        yield ("Фаренгейты: 82.4", null);
       }
 
       var io = testCase().iterator;
@@ -47,8 +71,8 @@ void main() {
     test("Обработка неверных входных данных", () async {
       testCase() sync* {
         yield ("Номер Лабораторной работы 4, 5, или 6: ", "4");
-        yield ("Введите номер задания: ", "1");
-        yield ("Введите целочисленный список: ", "10 28 -1 0 lorem");
+        yield ("Введите номер задания: ", "3");
+        yield ("Введите цельсий: ", "lorem");
         yield ("Неверные входные данные", null);
       }
 
@@ -69,7 +93,15 @@ void main() {
     });
   });
 
-  test("Функция по поиску максимального числа", () {
-    expect(getMaxValueOfList([10, 28, -1, 0]), 28);
+  group("Цельсий в фаренгейты (модульный)", () {
+    test(
+      "Функция перевода в фаренгейты дробное число",
+      () => expect(convertToFahrenheit(36.6), 97.88),
+    );
+
+    test(
+      "Функция перевода в фаренгейты целое число",
+      () => expect(convertToFahrenheit(28), 82.4),
+    );
   });
 }

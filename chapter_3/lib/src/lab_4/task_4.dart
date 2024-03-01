@@ -8,5 +8,11 @@ var task = Task("""
 """, execute);
 
 void execute(List<String> arguments) {
-  stdout.write("");
+  stdout.write("Введите строку: ");
+
+  stdout.write("Количество прописных букв: ${countUpperLetter("")}");
+}
+
+int countUpperLetter(String str) {
+  return 1;
 }

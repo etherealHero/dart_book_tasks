@@ -8,5 +8,11 @@ var task = Task("""
 """, execute);
 
 void execute(List<String> arguments) {
-  stdout.write("");
+  stdout.write("Введите целочисленный список: ");
+
+  stdout.write("Произведение чисел: ${getMultiplyOfList([])}");
+}
+
+int getMultiplyOfList(List<int> list) {
+  return 1;
 }

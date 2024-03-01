@@ -9,5 +9,11 @@ var task = Task("""
 """, execute);
 
 void execute(List<String> arguments) {
-  stdout.write("");
+  stdout.writeln("Введите цельсий: ");
+
+  stdout.writeln("Фаренгейты: ${convertToFahrenheit(1)}");
+}
+
+num convertToFahrenheit(num celsius) {
+  return 1;
 }
