@@ -2,6 +2,7 @@
 
 import "dart:convert";
 import "dart:io";
+import "package:chapter_3/src/lab_4/task_1.dart";
 import "package:test/test.dart";
 
 void main() {
@@ -18,11 +19,13 @@ void main() {
 
   tearDown(() => process.kill());
 
-  group("Запуск заданий", () {
-    test("Выбор Лабораторной работы и Задания", () async {
+  group("Поиск максималього числа (интеграционный)", () {
+    test("Верное максимальное число", () async {
       testCase() sync* {
         yield ("Номер Лабораторной работы 4, 5, или 6: ", "4");
         yield ("Введите номер задания: ", "1");
+        yield ("Введите целочисленный список: ", "10 28 -1 0");
+        yield ("Максимальное число: 28", null);
       }
 
       var io = testCase().iterator;
@@ -36,31 +39,16 @@ void main() {
           process.kill();
         }
       }
+
+      var exitCode = await process.exitCode;
+      expect(exitCode, 0, reason: "Ожидалось завершение программы");
     });
 
-    test("Выбор несуществующей Лабораторной работы", () async {
-      testCase() sync* {
-        yield ("Номер Лабораторной работы 4, 5, или 6: ", "-1");
-        yield ("Неверные входные данные", null);
-      }
-
-      var io = testCase().iterator;
-
-      await for (String output in stream) {
-        if (io.moveNext()) {
-          var (String expectedOutput, String? input) = io.current;
-          expect(output, expectedOutput);
-          process.stdin.writeln(input);
-        } else {
-          process.kill();
-        }
-      }
-    });
-
-    test("Выбор Лабораторной работы и несуществующейго задания", () async {
+    test("Обработка неверных входных данных", () async {
       testCase() sync* {
         yield ("Номер Лабораторной работы 4, 5, или 6: ", "4");
-        yield ("Введите номер задания: ", "-1");
+        yield ("Введите номер задания: ", "1");
+        yield ("Введите целочисленный список: ", "10 28 -1 0 lorem");
         yield ("Неверные входные данные", null);
       }
 
@@ -75,6 +63,13 @@ void main() {
           process.kill();
         }
       }
+
+      var exitCode = await process.exitCode;
+      expect(exitCode, 0, reason: "Ожидалось завершение программы");
     });
+  });
+
+  test("Поиск максималього числа (модульный)", () {
+    expect(getMaxValueOfList([10, 28, -1, 0]), 28);
   });
 }

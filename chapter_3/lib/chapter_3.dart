@@ -7,12 +7,6 @@ import '/src/lab_6/index.dart' as lab_6;
 final List<Tasks> _labs = [lab_4.tasks, lab_5.tasks, lab_6.tasks];
 
 void execute(List<String> arguments) {
-  // int labNumber = 4;
-  // int taskNumber = 1;
-
-  // labs[labNumber - 4].execute(taskNumber - 1, arguments);
-  // return;
-
   try {
     stdmsg.selectLab();
     int labNumber = int.parse(stdin.readLineSync()!);

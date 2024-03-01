@@ -28,6 +28,7 @@ void execute(List<String> arguments) {
   if (list.isEmpty) return stdmsg.raiseError();
 
   stdout.writeln("Максимальное число: ${getMaxValueOfList(list)}");
+  // stdout.writeln("Максимальное число: ${getMaxValueOfList(list)}");
 }
 
 int getMaxValueOfList(List<int> list) {
