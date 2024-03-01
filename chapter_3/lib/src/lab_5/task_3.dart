@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:chapter_3/src/shared.dart';
+import '/src/shared.dart';
 
 var task = Task("""
 12. Пользователь с клавиатуры вводит целое число N. Напишите

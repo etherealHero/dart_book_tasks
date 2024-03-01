@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:chapter_3/src/shared.dart';
+import '/src/shared.dart';
 
 var task = Task("""
 17. Пользователь вводит с клавиатуры строку, содержащую символы в

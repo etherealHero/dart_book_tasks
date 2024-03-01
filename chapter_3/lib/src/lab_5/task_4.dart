@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:chapter_3/src/shared.dart';
+import '/src/shared.dart';
 
 var task = Task("""
 14. Пользователь вводит с клавиатуры целочисленный список и число n.
