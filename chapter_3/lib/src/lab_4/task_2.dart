@@ -8,11 +8,19 @@ var task = Task("""
 """, execute);
 
 void execute(List<String> arguments) {
-  stdout.write("Введите целочисленный список: ");
+  stdout.writeln("Введите целочисленный список: ");
+  String? listRaw = stdin.readLineSync();
 
-  stdout.write("Произведение чисел: ${getMultiplyOfList([])}");
+  if (listRaw == null ||
+      listRaw.split(" ").indexWhere((e) => int.tryParse(e) == null) != -1) {
+    return stdmsg.raiseError();
+  }
+
+  List<int> list = listRaw.split(" ").map((e) => int.parse(e)).toList();
+
+  stdout.writeln("Произведение чисел: ${getMultiplyOfList(list)}");
 }
 
 int getMultiplyOfList(List<int> list) {
-  return 1;
+  return list.reduce((mult, e) => mult * e);
 }

@@ -9,10 +9,20 @@ var task = Task("""
 
 void execute(List<String> arguments) {
   stdout.writeln("Введите строку: ");
+  String? str = stdin.readLineSync();
 
-  stdout.writeln("Количество прописных букв: ${countUpperLetter("")}");
+  if (str == null) return stdmsg.raiseError();
+
+  stdout.writeln("Количество прописных букв: ${countUpperLetter(str)}");
 }
 
 int countUpperLetter(String str) {
-  return 1;
+  int counter = 0;
+
+  for (var letter in str.split("")) {
+    if (letter.toUpperCase() == letter &&
+        letter.toUpperCase() != letter.toLowerCase()) counter += 1;
+  }
+
+  return counter;
 }

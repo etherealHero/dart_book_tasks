@@ -10,10 +10,17 @@ var task = Task("""
 
 void execute(List<String> arguments) {
   stdout.writeln("Введите цельсий: ");
+  String? celsiusRaw = stdin.readLineSync();
 
-  stdout.writeln("Фаренгейты: ${convertToFahrenheit(1)}");
+  if (celsiusRaw == null || num.tryParse(celsiusRaw) == null) {
+    return stdmsg.raiseError();
+  }
+
+  num celsius = num.parse(celsiusRaw);
+
+  stdout.writeln("Фаренгейты: ${convertToFahrenheit(celsius)}");
 }
 
 num convertToFahrenheit(num celsius) {
-  return 1;
+  return celsius * 9 / 5 + 32;
 }

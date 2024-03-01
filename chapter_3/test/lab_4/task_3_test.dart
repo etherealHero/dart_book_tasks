@@ -33,7 +33,12 @@ void main() {
       await for (String output in stream) {
         if (io.moveNext()) {
           var (String expectedOutput, String? input) = io.current;
-          expect(output, expectedOutput);
+
+          expect(
+            outputFahrenheitParser(output),
+            expectedOutput,
+          );
+
           process.stdin.writeln(input);
         } else {
           process.kill();
@@ -96,7 +101,10 @@ void main() {
   group("Цельсий в фаренгейты (модульный)", () {
     test(
       "Функция перевода в фаренгейты дробное число",
-      () => expect(convertToFahrenheit(36.6), 97.88),
+      () => expect(
+        num.tryParse(convertToFahrenheit(36.6).toStringAsFixed(2)),
+        97.88,
+      ),
     );
 
     test(
@@ -104,4 +112,16 @@ void main() {
       () => expect(convertToFahrenheit(28), 82.4),
     );
   });
+}
+
+String outputFahrenheitParser(String output) {
+  if (output.startsWith("Фаренгейты: ")) {
+    num? distance = num.tryParse(output.substring(12));
+
+    if (distance != null) {
+      output = "Фаренгейты: "
+          "${distance.toStringAsFixed(2)}";
+    }
+  }
+  return output;
 }

@@ -84,11 +84,41 @@ void main() {
       expect(exitCode, 0, reason: "Ожидалось завершение программы");
     });
 
-    test("Обработка неверных входных данных", () async {
+    test("Неверные оси первой точки", () async {
       testCase() sync* {
         yield ("Номер Лабораторной работы 4, 5, или 6: ", "4");
         yield ("Введите номер задания: ", "5");
         yield ("Введите название осей точки 1: ", "x z");
+        yield ("Неверные входные данные", null);
+      }
+
+      var io = testCase().iterator;
+
+      await for (String output in stream) {
+        if (io.moveNext()) {
+          var (String expectedOutput, String? input) = io.current;
+
+          expect(
+            outputDistanceParser(output),
+            expectedOutput,
+          );
+
+          process.stdin.writeln(input);
+        } else {
+          process.kill();
+        }
+      }
+
+      var exitCode = await process.exitCode;
+      expect(exitCode, 0, reason: "Ожидалось завершение программы");
+    });
+
+    test("Неверные координаты первой точки", () async {
+      testCase() sync* {
+        yield ("Номер Лабораторной работы 4, 5, или 6: ", "4");
+        yield ("Введите номер задания: ", "5");
+        yield ("Введите название осей точки 1: ", "x y");
+        yield ("Введите значение осей точки 1: ", "4 lorem");
         yield ("Неверные входные данные", null);
       }
 
