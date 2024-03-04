@@ -14,5 +14,22 @@ var task = Task("""
 """, execute);
 
 void execute(List<String> arguments) {
-  stdout.write("");
+  stdout.writeln("Введите число N: ");
+  String? nRaw = stdin.readLineSync();
+
+  if (nRaw == null || int.tryParse(nRaw) == null) {
+    return stdmsg.raiseError();
+  }
+
+  int n = int.parse(nRaw);
+
+  stdout.writeln("Сумма чисел от 1 до N: ${sumNumbers(n)}");
+}
+
+int sumNumbers(int n) {
+  if (n == 1) {
+    return n;
+  } else {
+    return n + sumNumbers(n - 1);
+  }
 }
