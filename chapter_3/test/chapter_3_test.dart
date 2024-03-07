@@ -4,6 +4,8 @@ import "dart:convert";
 import "dart:io";
 import "package:test/test.dart";
 
+import "utils.dart";
+
 void main() {
   late Process process;
   late Stream<String> stream;
@@ -36,6 +38,8 @@ void main() {
           process.kill();
         }
       }
+
+      checkTestCaseFulfilled(io);
     });
 
     test("Выбор несуществующей Лабораторной работы", () async {
@@ -55,6 +59,8 @@ void main() {
           process.kill();
         }
       }
+
+      checkTestCaseFulfilled(io);
     });
 
     test("Выбор Лабораторной работы и несуществующейго задания", () async {
@@ -75,6 +81,8 @@ void main() {
           process.kill();
         }
       }
+
+      checkTestCaseFulfilled(io);
     });
   });
 }

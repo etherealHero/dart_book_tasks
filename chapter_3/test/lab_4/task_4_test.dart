@@ -5,6 +5,8 @@ import "dart:io";
 import "package:chapter_3/src/lab_4/task_4.dart";
 import "package:test/test.dart";
 
+import "../utils.dart";
+
 void main() {
   late Process process;
   late Stream<String> stream;
@@ -40,6 +42,8 @@ void main() {
         }
       }
 
+      checkTestCaseFulfilled(io);
+
       var exitCode = await process.exitCode;
       expect(exitCode, 0, reason: "Ожидалось завершение программы");
     });
@@ -64,6 +68,8 @@ void main() {
         }
       }
 
+      checkTestCaseFulfilled(io);
+
       var exitCode = await process.exitCode;
       expect(exitCode, 0, reason: "Ожидалось завершение программы");
     });
@@ -87,6 +93,8 @@ void main() {
           process.kill();
         }
       }
+
+      checkTestCaseFulfilled(io);
 
       var exitCode = await process.exitCode;
       expect(exitCode, 0, reason: "Ожидалось завершение программы");

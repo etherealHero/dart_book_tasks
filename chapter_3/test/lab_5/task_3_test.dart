@@ -2,7 +2,7 @@
 
 import "dart:convert";
 import "dart:io";
-import "package:chapter_3/src/lab_4/task_3.dart";
+import "package:chapter_3/src/lab_5/task_3.dart";
 import "package:test/test.dart";
 
 import "../utils.dart";
@@ -21,13 +21,13 @@ void main() {
 
   tearDown(() => process.kill());
 
-  group("Цельсий в фаренгейты (интеграционный)", () {
-    test("Дробное число", () async {
+  group("Является ли число степенью двойки (интеграционный)", () {
+    test("33 не является степенью двойки", () async {
       testCase() sync* {
-        yield ("Номер Лабораторной работы 4, 5, или 6: ", "4");
+        yield ("Номер Лабораторной работы 4, 5, или 6: ", "5");
         yield ("Введите номер задания: ", "3");
-        yield ("Введите цельсий: ", "36.6");
-        yield ("Фаренгейты: 97.88", null);
+        yield ("Введите число N: ", "33");
+        yield ("Является ли число N степенью двойки: false", null);
       }
 
       var io = testCase().iterator;
@@ -35,12 +35,7 @@ void main() {
       await for (String output in stream) {
         if (io.moveNext()) {
           var (String expectedOutput, String? input) = io.current;
-
-          expect(
-            outputFahrenheitParser(output),
-            expectedOutput,
-          );
-
+          expect(output, expectedOutput);
           process.stdin.writeln(input);
         } else {
           process.kill();
@@ -53,12 +48,38 @@ void main() {
       expect(exitCode, 0, reason: "Ожидалось завершение программы");
     });
 
-    test("Целое число", () async {
+    test("48 не является степенью двойки", () async {
       testCase() sync* {
-        yield ("Номер Лабораторной работы 4, 5, или 6: ", "4");
+        yield ("Номер Лабораторной работы 4, 5, или 6: ", "5");
         yield ("Введите номер задания: ", "3");
-        yield ("Введите цельсий: ", "28");
-        yield ("Фаренгейты: 82.4", null);
+        yield ("Введите число N: ", "48");
+        yield ("Является ли число N степенью двойки: false", null);
+      }
+
+      var io = testCase().iterator;
+
+      await for (String output in stream) {
+        if (io.moveNext()) {
+          var (String expectedOutput, String? input) = io.current;
+          expect(output, expectedOutput);
+          process.stdin.writeln(input);
+        } else {
+          process.kill();
+        }
+      }
+
+      checkTestCaseFulfilled(io);
+
+      var exitCode = await process.exitCode;
+      expect(exitCode, 0, reason: "Ожидалось завершение программы");
+    });
+
+    test("32 является степенью двойки", () async {
+      testCase() sync* {
+        yield ("Номер Лабораторной работы 4, 5, или 6: ", "5");
+        yield ("Введите номер задания: ", "3");
+        yield ("Введите число N: ", "32");
+        yield ("Является ли число N степенью двойки: true", null);
       }
 
       var io = testCase().iterator;
@@ -81,9 +102,9 @@ void main() {
 
     test("Обработка неверных входных данных", () async {
       testCase() sync* {
-        yield ("Номер Лабораторной работы 4, 5, или 6: ", "4");
+        yield ("Номер Лабораторной работы 4, 5, или 6: ", "5");
         yield ("Введите номер задания: ", "3");
-        yield ("Введите цельсий: ", "lorem");
+        yield ("Введите число N: ", "lorem");
         yield ("Неверные входные данные", null);
       }
 
@@ -106,30 +127,18 @@ void main() {
     });
   });
 
-  group("Цельсий в фаренгейты (модульный)", () {
+  group("Функция определяет является ли число степенью двойки (модульный)", () {
     test(
-      "Функция перевода в фаренгейты дробное число",
-      () => expect(
-        num.tryParse(convertToFahrenheit(36.6).toStringAsFixed(2)),
-        97.88,
-      ),
+      "Функция: 32 является степенью двойки",
+      () => expect(isExponentOfTwo(32), true),
     );
-
     test(
-      "Функция перевода в фаренгейты целое число",
-      () => expect(convertToFahrenheit(28), 82.4),
+      "Функция: 33 не является степенью двойки",
+      () => expect(isExponentOfTwo(33), false),
+    );
+    test(
+      "Функция: 48 не является степенью двойки",
+      () => expect(isExponentOfTwo(48), false),
     );
   });
-}
-
-String outputFahrenheitParser(String output) {
-  if (output.startsWith("Фаренгейты: ")) {
-    num? distance = num.tryParse(output.substring(12));
-
-    if (distance != null) {
-      output = "Фаренгейты: "
-          "${distance.toStringAsFixed(2)}";
-    }
-  }
-  return output;
 }

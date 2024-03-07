@@ -2,7 +2,7 @@
 
 import "dart:convert";
 import "dart:io";
-import "package:chapter_3/src/lab_4/task_1.dart";
+import "package:chapter_3/src/lab_6/task_1.dart";
 import "package:test/test.dart";
 
 import "../utils.dart";
@@ -21,13 +21,18 @@ void main() {
 
   tearDown(() => process.kill());
 
-  group("Поиск максималього числа (интеграционный)", () {
-    test("Верное максимальное число", () async {
+  group("Счетчик (интеграционный)", () {
+    test("Счетчики работают раздельно (интеграционный)", () async {
       testCase() sync* {
-        yield ("Номер Лабораторной работы 4, 5, или 6: ", "4");
+        yield ("Номер Лабораторной работы 4, 5, или 6: ", "6");
         yield ("Введите номер задания: ", "1");
-        yield ("Введите целочисленный список: ", "10 28 -1 0");
-        yield ("Максимальное число: 28", null);
+        yield ("Введите начальное значение счетчика 1: ", "2");
+        yield ("Введите начальное значение счетчика 2: ", "3");
+        yield (
+          "Тройной вызов первого счетчика: 5; "
+              "Вызов второго счетчика: 4",
+          null
+        );
       }
 
       var io = testCase().iterator;
@@ -50,9 +55,10 @@ void main() {
 
     test("Обработка неверных входных данных", () async {
       testCase() sync* {
-        yield ("Номер Лабораторной работы 4, 5, или 6: ", "4");
+        yield ("Номер Лабораторной работы 4, 5, или 6: ", "6");
         yield ("Введите номер задания: ", "1");
-        yield ("Введите целочисленный список: ", "10 28 -1 0 lorem");
+        yield ("Введите начальное значение счетчика 1: ", "2");
+        yield ("Введите начальное значение счетчика 2: ", "lorem");
         yield ("Неверные входные данные", null);
       }
 
@@ -75,7 +81,30 @@ void main() {
     });
   });
 
-  test("Функция по поиску максимального числа", () {
-    expect(getMaxValueOfList([10, 28, -1, 0]), 28);
+  group("Модульное тестирование счетчика", () {
+    test(
+      "Счетчик увеличивается на 1",
+      () {
+        int Function() firstIncrement = createIterator(4);
+
+        expect(firstIncrement(), 5);
+        expect(firstIncrement(), 6);
+        expect(firstIncrement(), 7);
+      },
+    );
+
+    test(
+      "Счетчики работают раздельно",
+      () {
+        int Function() firstIncrement = createIterator(2);
+        int Function() secondIncrement = createIterator(3);
+
+        firstIncrement();
+        firstIncrement();
+
+        expect(firstIncrement(), 5);
+        expect(secondIncrement(), 4);
+      },
+    );
   });
 }

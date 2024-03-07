@@ -2,7 +2,7 @@
 
 import "dart:convert";
 import "dart:io";
-import "package:chapter_3/src/lab_4/task_1.dart";
+import "package:chapter_3/src/lab_5/task_2.dart";
 import "package:test/test.dart";
 
 import "../utils.dart";
@@ -21,13 +21,13 @@ void main() {
 
   tearDown(() => process.kill());
 
-  group("Поиск максималього числа (интеграционный)", () {
-    test("Верное максимальное число", () async {
+  group("Рекурсивный поиск минимального числа (интеграционный)", () {
+    test("Рекурсивный поиск минимального числа", () async {
       testCase() sync* {
-        yield ("Номер Лабораторной работы 4, 5, или 6: ", "4");
-        yield ("Введите номер задания: ", "1");
+        yield ("Номер Лабораторной работы 4, 5, или 6: ", "5");
+        yield ("Введите номер задания: ", "2");
         yield ("Введите целочисленный список: ", "10 28 -1 0");
-        yield ("Максимальное число: 28", null);
+        yield ("Минимальное значение из списка: -1", null);
       }
 
       var io = testCase().iterator;
@@ -50,8 +50,8 @@ void main() {
 
     test("Обработка неверных входных данных", () async {
       testCase() sync* {
-        yield ("Номер Лабораторной работы 4, 5, или 6: ", "4");
-        yield ("Введите номер задания: ", "1");
+        yield ("Номер Лабораторной работы 4, 5, или 6: ", "5");
+        yield ("Введите номер задания: ", "2");
         yield ("Введите целочисленный список: ", "10 28 -1 0 lorem");
         yield ("Неверные входные данные", null);
       }
@@ -75,7 +75,9 @@ void main() {
     });
   });
 
-  test("Функция по поиску максимального числа", () {
-    expect(getMaxValueOfList([10, 28, -1, 0]), 28);
+  test("Функция по рекурсивному поиску минимального числа", () {
+    var list = [10, 28, -1, 0];
+
+    expect(getMinValueOfList(list, list.length - 1, list[list.length - 1]), -1);
   });
 }

@@ -2,7 +2,7 @@
 
 import "dart:convert";
 import "dart:io";
-import "package:chapter_3/src/lab_4/task_1.dart";
+import "package:chapter_3/src/lab_6/task_3.dart";
 import "package:test/test.dart";
 
 import "../utils.dart";
@@ -21,13 +21,16 @@ void main() {
 
   tearDown(() => process.kill());
 
-  group("Поиск максималього числа (интеграционный)", () {
-    test("Верное максимальное число", () async {
+  group("Функция-конструктор инспектор строки (интеграционный)", () {
+    test("Функция-конструктор инспектор строки (интеграционный)", () async {
       testCase() sync* {
-        yield ("Номер Лабораторной работы 4, 5, или 6: ", "4");
-        yield ("Введите номер задания: ", "1");
-        yield ("Введите целочисленный список: ", "10 28 -1 0");
-        yield ("Максимальное число: 28", null);
+        yield ("Номер Лабораторной работы 4, 5, или 6: ", "6");
+        yield ("Введите номер задания: ", "3");
+        yield ("Введите строку: ", "lorem dolor");
+        yield ("Символ строки по индексу 0: 'l'", null);
+        yield ("Символ строки по индексу 3: 'e'", null);
+        yield ("Символ строки по индексу 5: ' '", null);
+        yield ("Символ строки по индексу 1000: ''", null);
       }
 
       var io = testCase().iterator;
@@ -50,9 +53,9 @@ void main() {
 
     test("Обработка неверных входных данных", () async {
       testCase() sync* {
-        yield ("Номер Лабораторной работы 4, 5, или 6: ", "4");
-        yield ("Введите номер задания: ", "1");
-        yield ("Введите целочисленный список: ", "10 28 -1 0 lorem");
+        yield ("Номер Лабораторной работы 4, 5, или 6: ", "6");
+        yield ("Введите номер задания: ", "3");
+        yield ("Введите строку: ", "");
         yield ("Неверные входные данные", null);
       }
 
@@ -75,7 +78,16 @@ void main() {
     });
   });
 
-  test("Функция по поиску максимального числа", () {
-    expect(getMaxValueOfList([10, 28, -1, 0]), 28);
-  });
+  test(
+    "Функция-конструктор инспектор строки (модульный)",
+    () {
+      var stringInspector = createStringInspector("lorem dolor");
+
+      expect(stringInspector(0), 'l');
+      expect(stringInspector(3), 'e');
+      expect(stringInspector(5), ' ');
+      expect(stringInspector(1000), '',
+          reason: 'За пределами строки ожидается пустой символ');
+    },
+  );
 }
