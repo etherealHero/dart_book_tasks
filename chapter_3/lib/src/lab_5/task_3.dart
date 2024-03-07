@@ -9,5 +9,22 @@ false. Полученный результат выведите в термин�
 """, execute);
 
 void execute(List<String> arguments) {
-  stdout.write("");
+  stdout.writeln("Введите число N: ");
+  String? nRaw = stdin.readLineSync();
+
+  if (nRaw == null || int.tryParse(nRaw) == null) {
+    return stdmsg.raiseError();
+  }
+
+  int n = int.parse(nRaw);
+
+  stdout.writeln("Является ли число N степенью двойки: ${isExponentOfTwo(n)}");
+}
+
+bool isExponentOfTwo(num n) {
+  return switch (n) {
+    num n when n / 2 == 2 => true,
+    num n when n / 2 < 2 => false,
+    _ => isExponentOfTwo(n / 2),
+  };
 }

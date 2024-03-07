@@ -16,5 +16,33 @@ var task = Task("""
 """, execute);
 
 void execute(List<String> arguments) {
-  stdout.write("");
+  stdout.writeln("Введите начальное значение счетчика 1: ");
+  String? firstInitRaw = stdin.readLineSync();
+
+  if (firstInitRaw == null || int.tryParse(firstInitRaw) == null) {
+    return stdmsg.raiseError();
+  }
+
+  stdout.writeln("Введите начальное значение счетчика 2: ");
+  String? secondInitRaw = stdin.readLineSync();
+
+  if (secondInitRaw == null || int.tryParse(secondInitRaw) == null) {
+    return stdmsg.raiseError();
+  }
+
+  int Function() firstIncrement = createIterator(int.parse(firstInitRaw));
+  int Function() secondIncrement = createIterator(int.parse(secondInitRaw));
+
+  firstIncrement();
+  firstIncrement();
+
+  stdout.writeln(
+    "Тройной вызов первого счетчика: ${firstIncrement()}; "
+    "Вызов второго счетчика: ${secondIncrement()}",
+  );
+}
+
+int Function() createIterator(int init) {
+  int iterator = init;
+  return () => ++iterator;
 }
