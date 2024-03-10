@@ -33,7 +33,12 @@ void execute(List<String> arguments) {
 
   stdout.writeln(room.getInfo());
 
-  room.evict(alex);
+  try {
+    room.evict(alex);
+  } on PersonNotLivesInRoomError catch (e) {
+    stdout.writeln(e.msg);
+  }
+
   room.evict(petr);
   room.populate(alice);
   room.populate(alex, isGovernor: true);

@@ -2,13 +2,19 @@ import 'dart:io';
 
 import 'package:chapter_4/src/lab_7/task_1/resident.dart';
 
+class PersonNotLivesInRoomError implements Exception {
+  final String? msg;
+
+  const PersonNotLivesInRoomError([this.msg]);
+}
+
 class Room {
   final List<Person> _residentList = [];
   final int _maxResidentCount;
 
   int get currentResidentCount => _residentList.length;
   int get maxResidentCount => _maxResidentCount;
-  String get residents => _residentList.join(", ");
+  List<Person> get residents => _residentList;
 
   Room(this._maxResidentCount);
 
@@ -32,7 +38,8 @@ class Room {
 
   List<Person> evict(Person resident) {
     if (_residentList.indexWhere((s) => s.name == resident.name) == -1) {
-      stdout.writeln('В комнате не проживает студент ${resident.name}');
+      throw PersonNotLivesInRoomError(
+          "В комнате не проживает студент ${resident.name}");
     } else {
       _residentList.removeWhere((s) => s.name == resident.name);
       stdout.writeln('Студент ${resident.name} выселен из комнаты');
@@ -42,12 +49,10 @@ class Room {
   }
 
   String getInfo() {
-    return """
-==============
-Вместимость комнаты: $maxResidentCount
-Количество проживающих: $currentResidentCount
-Проживающие в комнате: $residents
-==============
-""";
+    return "==============\n"
+        "Вместимость комнаты: $maxResidentCount\n"
+        "Количество проживающих: $currentResidentCount\n"
+        "Проживающие в комнате: ${residents.join(", ")}\n"
+        "==============";
   }
 }
