@@ -3,6 +3,9 @@
 тестами и содержать хотя бы одно исключение.
 */
 import 'dart:io';
+import './task_1/resident.dart';
+import './task_1/room.dart';
+
 import '/src/shared.dart';
 
 var task = Task("""
@@ -17,5 +20,23 @@ var task = Task("""
 """, execute);
 
 void execute(List<String> arguments) {
-  stdout.writeln("");
+  var maxim = Person('maxim');
+  var petr = Person('petr');
+  var alice = Person('alice');
+  var alex = Person('alex');
+
+  var room = Room(2);
+
+  room.populate(maxim);
+  room.populate(petr);
+  room.populate(alice);
+
+  stdout.writeln(room.getInfo());
+
+  room.evict(alex);
+  room.evict(petr);
+  room.populate(alice);
+  room.populate(alex, isGovernor: true);
+
+  stdout.writeln(room.getInfo());
 }
