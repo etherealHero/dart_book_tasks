@@ -15,8 +15,9 @@ void execute(List<String> arguments) {
     stdmsg.selectTask();
     int taskNumber = int.parse(stdin.readLineSync()!) - 1;
 
-    _labs[labNumber - 4].execute(taskNumber, arguments);
+    _labs[labNumber - 7].execute(taskNumber, arguments);
   } catch (e) {
     stdmsg.raiseError();
+    // rethrow;
   }
 }
