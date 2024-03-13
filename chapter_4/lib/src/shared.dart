@@ -34,6 +34,11 @@ class Tasks {
   final List<Task> tasks;
 
   void execute(int taskNumber, List<String> arguments) {
+    if (!tasks.asMap().containsKey(taskNumber)) {
+      throw ArgumentError.value(taskNumber + 1, 'Номер задачи',
+          'Выбранный номер задачи не существует');
+    }
+
     tasks[taskNumber].execute(arguments);
   }
 }

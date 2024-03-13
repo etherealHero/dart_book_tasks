@@ -45,7 +45,11 @@ void main() {
     test("Выбор несуществующей Лабораторной работы", () async {
       testCase() sync* {
         yield ("Номер Лабораторной работы 7 или 8: ", "-1");
-        yield ("Неверные входные данные", null);
+        yield (
+          "Invalid argument (Номер лабораторной работы): "
+              "Ожидалось значение 7 или 8, текущее: -1",
+          null
+        );
       }
 
       var io = testCase().iterator;
@@ -67,7 +71,11 @@ void main() {
       testCase() sync* {
         yield ("Номер Лабораторной работы 7 или 8: ", "7");
         yield ("Введите номер задания: ", "-1");
-        yield ("Неверные входные данные", null);
+        yield (
+          "Invalid argument (Номер задачи): "
+              "Выбранный номер задачи не существует: -1",
+          null
+        );
       }
 
       var io = testCase().iterator;

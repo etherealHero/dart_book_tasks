@@ -41,7 +41,12 @@ void execute(List<String> arguments) {
   scale.addProduct(carrot);
   scale.addProduct(apple);
   scale.addProduct(carrot);
-  scale.addProduct(cherry);
+
+  try {
+    scale.addProduct(cherry);
+  } on ScaleMaxWeightRangeError catch (e) {
+    stdout.writeln(e.msg);
+  }
 
   stdout.writeln("Максимальный вес: ${scale.maxWeight}");
   stdout.writeln("Итоговый вес: ${scale.currentWeight}");

@@ -2,6 +2,12 @@ import 'dart:io';
 
 import 'package:chapter_4/src/lab_7/task_2/product.dart';
 
+class ScaleMaxWeightRangeError implements Exception {
+  final String? msg;
+
+  const ScaleMaxWeightRangeError([this.msg]);
+}
+
 class Scale {
   final double _maxWeight;
   final List<Product> _products = [];
@@ -24,11 +30,10 @@ class Scale {
 
   void addProduct(Product product) {
     if (currentWeight + product.weight > _maxWeight) {
-      stdout.writeln(
+      throw ScaleMaxWeightRangeError(
         "Продукт ${product.name} невозможно добавить. "
         "Достигнут лимит веса",
       );
-      return;
     }
 
     stdout.writeln("Добавлен продукт ${product.name}");

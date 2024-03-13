@@ -10,14 +10,19 @@ void execute(List<String> arguments) {
     stdmsg.selectLab();
     int labNumber = int.parse(stdin.readLineSync()!);
 
-    if (![7, 8].contains(labNumber)) throw Error();
+    if (![7, 8].contains(labNumber)) {
+      throw ArgumentError.value(
+        labNumber,
+        "Номер лабораторной работы",
+        "Ожидалось значение 7 или 8, текущее",
+      );
+    }
 
     stdmsg.selectTask();
     int taskNumber = int.parse(stdin.readLineSync()!) - 1;
 
     _labs[labNumber - 7].execute(taskNumber, arguments);
-  } catch (e) {
-    stdmsg.raiseError();
-    // rethrow;
+  } on ArgumentError catch (e) {
+    stdout.writeln(e);
   }
 }
