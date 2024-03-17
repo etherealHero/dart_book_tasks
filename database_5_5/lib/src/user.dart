@@ -1,4 +1,4 @@
-import 'package:database_5_5/src/i_attribute.dart';
+import 'i_attribute.dart';
 
 enum AcsessLevel {
   strudent('S'),

@@ -1,5 +1,5 @@
-import 'package:database_5_5/src/i_attribute.dart';
-import 'package:database_5_5/src/user.dart';
+import 'i_attribute.dart';
+import 'user.dart';
 
 final class _Node<T extends IAttribute> {
   T data;
