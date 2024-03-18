@@ -22,6 +22,8 @@ void execute(List<String> arguments) {
     stdout.writeln(
       "Файл $filePath не существует. Завершение программы",
     );
+
+    return;
   }
 
   List<String> lines = file.readAsLinesSync();

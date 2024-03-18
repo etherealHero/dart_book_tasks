@@ -8,9 +8,16 @@ var task = Task("""
 """, execute);
 
 void execute(List<String> arguments) {
-  File file1 = getExistsFileByPath('bin\\task_2\\file_1.txt');
-  File file2 = getExistsFileByPath('bin\\task_2\\file_2.txt');
-  File file3 = getExistsFileByPath('bin\\task_2\\file_3.txt');
+  File file1, file2, file3;
+
+  try {
+    file1 = getExistsFileByPath('bin\\task_2\\file_1.txt');
+    file2 = getExistsFileByPath('bin\\task_2\\file_2.txt');
+    file3 = getExistsFileByPath('bin\\task_2\\file_3.txt');
+  } catch (e) {
+    stdout.writeln(e);
+    return;
+  }
 
   var wholeLinesList = <String>[];
 
@@ -18,7 +25,8 @@ void execute(List<String> arguments) {
   wholeLinesList.addAll(file2.readAsLinesSync());
   wholeLinesList.addAll(file3.readAsLinesSync());
 
-  var fileOutput = File('bin\\task_2\\file_output.txt');
+  const fileOutputPath = 'bin\\task_2\\file_output.txt';
+  var fileOutput = File(fileOutputPath);
 
   StringBuffer sb = StringBuffer();
   for (var line in wholeLinesList) {
@@ -26,6 +34,7 @@ void execute(List<String> arguments) {
   }
 
   fileOutput.writeAsStringSync(sb.toString());
+  stdout.writeln("Данные записаны в файл: $fileOutputPath");
 }
 
 File getExistsFileByPath(String path) {

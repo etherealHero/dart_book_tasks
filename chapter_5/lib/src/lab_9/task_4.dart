@@ -10,7 +10,7 @@ var task = Task("""
 
 void execute(List<String> arguments) {
   String filePath = 'bin\\task_4\\file.txt';
-  String filePathOutput = 'bin\\task_4\\file_output.txt';
+  String fileOutputPath = 'bin\\task_4\\file_output.txt';
 
   File file = File(filePath);
 
@@ -18,6 +18,8 @@ void execute(List<String> arguments) {
     stdout.writeln(
       "Файл $filePath не существует. Завершение программы",
     );
+
+    return;
   }
 
   var fileData = file.readAsStringSync();
@@ -26,7 +28,8 @@ void execute(List<String> arguments) {
   ).toList()
     ..sort(((a, b) => (a as String).compareTo(b)));
 
-  var fileOutput = File(filePathOutput);
+  var fileOutput = File(fileOutputPath);
 
   fileOutput.writeAsStringSync(uniqueWords.join(", "));
+  stdout.writeln("Данные записаны в файл: $fileOutputPath");
 }

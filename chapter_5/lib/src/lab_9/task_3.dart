@@ -9,7 +9,14 @@ var task = Task("""
 """, execute);
 
 void execute(List<String> arguments) {
-  File file = File('bin\\task_3\\file.txt');
+  File file;
+
+  try {
+    file = getExistsFileByPath('bin\\task_3\\file.txt');
+  } catch (e) {
+    stdout.writeln(e);
+    return;
+  }
 
   List<String> vowels = "ауоиэыяюеё".split("");
   List<String> consonant = "бвгджзйклмнпрстфхцчшщ".split("");
@@ -53,4 +60,14 @@ void execute(List<String> arguments) {
 
   var fileOutput = File("bin\\task_3\\file_output.txt");
   fileOutput.writeAsString("Гласная: $mostVowel\nСогласная: $mostConsonant");
+}
+
+File getExistsFileByPath(String path) {
+  File file = File(path);
+
+  if (!file.existsSync()) {
+    throw Exception('Файл $path не существует');
+  }
+
+  return file;
 }
