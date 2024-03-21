@@ -1,0 +1,31 @@
+{
+  "pizzeria": {
+    "name": "Pizza World",
+    "location": "789 Pine Street",
+    "menu": [
+      {
+        "name": "Margherita",
+        "price": 10.99,
+        "ingredients": [
+          "tomato",
+          "mozzarella",
+          "basil"
+        ],
+        "is_vegetarian": true,
+        "is_spicy": false,
+        "special_instructions": "Extra cheese available upon request"
+      },
+      {
+        "name": "Pepperoni",
+        "price": 12.99,
+        "ingredients": [
+          "tomato",
+          "mozzarella",
+          "pepperoni"
+        ],
+        "is_vegetarian": false,
+        "is_spicy": true
+      }
+    ]
+  }
+}
